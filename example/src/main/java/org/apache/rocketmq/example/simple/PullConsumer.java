@@ -38,11 +38,12 @@ public class PullConsumer {
     public static void main(String[] args) throws MQClientException {
 
         DefaultMQPullConsumer consumer = new DefaultMQPullConsumer("please_rename_unique_group_name_5");
-        consumer.setNamesrvAddr("127.0.0.1:9876");
+        consumer.setNamesrvAddr(Producer.DEFAULT_NAMESRVADDR);
         Set<String> topics = new HashSet<>();
         //You would better to register topics,It will use in rebalance when starting
-        topics.add("TopicTest");
+        topics.add(Producer.TOPIC);
         consumer.setRegisterTopics(topics);
+//        consumer.setEnableStreamRequestType();
         consumer.start();
 
         ExecutorService executors = Executors.newFixedThreadPool(topics.size(), new ThreadFactory() {
@@ -57,7 +58,9 @@ public class PullConsumer {
 
                 public void doSomething(List<MessageExt> msgs) {
                     //do your business
-
+                    for (MessageExt msg : msgs) {
+                        System.out.println(msg);
+                    }
                 }
 
                 @Override

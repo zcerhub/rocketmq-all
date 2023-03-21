@@ -17,6 +17,7 @@
 package org.apache.rocketmq.common;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 import org.apache.rocketmq.common.constant.LoggerName;
 import org.apache.rocketmq.logging.InternalLogger;
@@ -31,6 +32,7 @@ public abstract class ConfigManager {
         String fileName = null;
         try {
             fileName = this.configFilePath();
+//            System.out.println(fileName);
             String jsonString = MixAll.file2String(fileName);
 
             if (null == jsonString || jsonString.length() == 0) {
@@ -41,6 +43,7 @@ public abstract class ConfigManager {
                 return true;
             }
         } catch (Exception e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
             log.error("load " + fileName + " failed, and try to load backup file", e);
             return this.loadBak();
         }

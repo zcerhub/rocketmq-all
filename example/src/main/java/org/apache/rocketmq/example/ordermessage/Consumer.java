@@ -28,9 +28,11 @@ import org.apache.rocketmq.common.message.MessageExt;
 
 public class Consumer {
 
+    public static final String NAMESERVER_ADDR="localhost:9876";
+
     public static void main(String[] args) throws MQClientException {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("please_rename_unique_group_name_3");
-
+        consumer.setNamesrvAddr(NAMESERVER_ADDR);
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
 
         consumer.subscribe("TopicTest", "TagA || TagC || TagD");

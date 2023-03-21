@@ -26,7 +26,7 @@ public class OnewayProducer {
         //Instantiate with a producer group name.
         DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name");
         // Specify name server addresses.
-        producer.setNamesrvAddr("localhost:9876");
+        producer.setNamesrvAddr("192.168.152.135:9876");
         //Launch the instance.
         producer.start();
         for (int i = 0; i < 100; i++) {

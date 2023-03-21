@@ -131,6 +131,8 @@ public class BrokerStartup {
                 System.exit(-2);
             }
 
+            brokerConfig.setNamesrvAddr("localhost:9876");
+            brokerConfig.setTraceTopicEnable(true);
             String namesrvAddr = brokerConfig.getNamesrvAddr();
             if (null != namesrvAddr) {
                 try {
@@ -180,7 +182,8 @@ public class BrokerStartup {
             if (brokerConfig.isIsolateLogEnable() && messageStoreConfig.isEnableDLegerCommitLog()) {
                 System.setProperty("brokerLogDir", brokerConfig.getBrokerName() + "_" + messageStoreConfig.getdLegerSelfId());
             }
-            configurator.doConfigure(brokerConfig.getRocketmqHome() + "/conf/logback_broker.xml");
+//            brokerConfig.setRocketmqHome("D:\\code\\rocketmq\\broker");
+            configurator.doConfigure(brokerConfig.getRocketmqHome() + "\\conf\\logback_broker.xml");
 
             if (commandLine.hasOption('p')) {
                 InternalLogger console = InternalLoggerFactory.getLogger(LoggerName.BROKER_CONSOLE_NAME);

@@ -27,6 +27,8 @@ public class LitePullConsumerSubscribe {
 
     public static void main(String[] args) throws Exception {
         DefaultLitePullConsumer litePullConsumer = new DefaultLitePullConsumer("lite_pull_consumer_test");
+        litePullConsumer.setEnableMsgTrace(true);
+        litePullConsumer.setNamesrvAddr(Producer.DEFAULT_NAMESRVADDR);
         litePullConsumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
         litePullConsumer.subscribe("TopicTest", "*");
         litePullConsumer.start();
